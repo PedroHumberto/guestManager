@@ -1,4 +1,4 @@
-package com.example.guest_manager.ui.absent
+package com.example.guest_manager.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

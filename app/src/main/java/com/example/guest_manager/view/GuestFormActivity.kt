@@ -1,11 +1,13 @@
-package com.example.guest_manager
+package com.example.guest_manager.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.guest_manager.GuestModel
+import com.example.guest_manager.R
 import com.example.guest_manager.databinding.ActivityGuestFormBinding
+import com.example.guest_manager.viewmodel.GuestFormViewModel
 
 class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -30,7 +32,7 @@ class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View) {
         if(v.id == R.id.button){
-
+           // view.save(GuestModel(10, "Pedro Cardoso", false)
         }
     }
 }

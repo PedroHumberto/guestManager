@@ -1,4 +1,4 @@
-package com.example.guest_manager.ui.allGuest
+package com.example.guest_manager.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.guest_manager.databinding.FragmentAllGuestsBinding
+import com.example.guest_manager.databinding.FragmentAbsentBinding
+import com.example.guest_manager.viewmodel.AbsentViewModel
 
 
-class AllGuestsFragment : Fragment() {
+class AbsentFragment : Fragment() {
 
-    private var _binding: FragmentAllGuestsBinding? = null
+    private var _binding: FragmentAbsentBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -24,12 +25,12 @@ class AllGuestsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val viewModel =
-            ViewModelProvider(this).get(AllGuestsViewModel::class.java)
+            ViewModelProvider(this).get(AbsentViewModel::class.java)
 
-        _binding = FragmentAllGuestsBinding.inflate(inflater, container, false)
+        _binding = FragmentAbsentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
+        val textView: TextView = binding.textSlideshow
         viewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
