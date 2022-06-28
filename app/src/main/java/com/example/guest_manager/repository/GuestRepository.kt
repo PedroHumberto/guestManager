@@ -5,7 +5,7 @@ import android.content.Context
 import com.example.guest_manager.constants.DataBaseConstants
 import com.example.guest_manager.model.GuestModel
 
-class GuestRepository private constructor(context: Context){
+class GuestRepository private constructor(context: Context) {
 
     private val guestDataBase = GuestDataBase(context)
 
@@ -15,18 +15,19 @@ class GuestRepository private constructor(context: Context){
 
         fun getInstance(context: Context): GuestRepository {
             //impede com que o repositorio seja inicializado varias vezes
-            if(!Companion::repository.isInitialized){
+            if (!Companion::repository.isInitialized) {
                 repository = GuestRepository(context)
             }
             return repository
         }
     }
+
     fun insert(guest: GuestModel): Boolean {
         try {
             val db = guestDataBase.writableDatabase
 
             //como não aceita true ou false, retorna 1 ou 0.
-            val presence = if(guest.presence) 1 else 0
+            val presence = if (guest.presence) 1 else 0
 
             val values = ContentValues()
             values.put(DataBaseConstants.GUEST.COLUMNS.NAME, guest.name)
@@ -35,17 +36,17 @@ class GuestRepository private constructor(context: Context){
             db.insert(DataBaseConstants.GUEST.TABLE_NAME, null, values)
             return true
 
-        }catch (e: Exception){
+        } catch (e: Exception) {
             return false
         }
     }
 
-    fun update(guest: GuestModel): Boolean{
+    fun update(guest: GuestModel): Boolean {
         try {
             val db = guestDataBase.writableDatabase
             //preenchimento de values
             val values = ContentValues()
-            val presence = if(guest.presence) 1 else 0
+            val presence = if (guest.presence) 1 else 0
             values.put(DataBaseConstants.GUEST.COLUMNS.NAME, guest.name)
             values.put(DataBaseConstants.GUEST.COLUMNS.PRESENCE, presence)
 
@@ -54,12 +55,12 @@ class GuestRepository private constructor(context: Context){
 
             db.update(DataBaseConstants.GUEST.TABLE_NAME, values, selection, args)
             return true
-        }catch (e: Exception){
+        } catch (e: Exception) {
             return false
         }
     }
 
-    fun delete(guestId: Int): Boolean{
+    fun delete(guestId: Int): Boolean {
         try {
             val db = guestDataBase.writableDatabase
 
@@ -71,14 +72,50 @@ class GuestRepository private constructor(context: Context){
             db.delete(DataBaseConstants.GUEST.TABLE_NAME, selection, args)
             return true
 
-        }catch (e: Exception){
+        } catch (e: Exception) {
             return false
         }
     }
 
-    fun getAll(){
+    fun getAll(): List<GuestModel> {
+        val list = mutableListOf<GuestModel>()
+
+        try {
+            val db = guestDataBase.readableDatabase
+            val tableName = DataBaseConstants.GUEST.TABLE_NAME
+
+            val columnId = DataBaseConstants.GUEST.COLUMNS.ID
+            val columnName = DataBaseConstants.GUEST.COLUMNS.NAME
+            val columnPresence = DataBaseConstants.GUEST.COLUMNS.PRESENCE
+
+            val selector = arrayOf(
+                columnId,
+                columnName,
+                columnPresence
+            )
+            val cursor = db.query(
+                tableName,
+                selector, null, null, null, null, null
+            )
+
+            if (cursor != null && cursor.count > 0) {
+                while (cursor.moveToNext()) {
+
+                    //INDEX da coluna 0 = id,   1 = name,  2 = presence
+                    val id = cursor.getInt(cursor.getColumnIndex(columnId))
+                    val name = cursor.getString(cursor.getColumnIndex(columnName))
+                    val presence = cursor.getInt(cursor.getColumnIndex(columnPresence))
+
+                    list.add(GuestModel(id, name, presence == 1))
+
+                }
+            }
+            cursor.close()
+
+        }catch (e: Exception){
+            return list
+        }
+        return list
 
     }
-
-
 }
