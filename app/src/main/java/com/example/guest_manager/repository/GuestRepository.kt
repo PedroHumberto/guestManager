@@ -1,5 +1,6 @@
 package com.example.guest_manager.repository
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import com.example.guest_manager.constants.DataBaseConstants
@@ -77,6 +78,7 @@ class GuestRepository private constructor(context: Context) {
         }
     }
 
+    @SuppressLint("Range")
     fun getAll(): List<GuestModel> {
         val list = mutableListOf<GuestModel>()
 
@@ -88,14 +90,106 @@ class GuestRepository private constructor(context: Context) {
             val columnName = DataBaseConstants.GUEST.COLUMNS.NAME
             val columnPresence = DataBaseConstants.GUEST.COLUMNS.PRESENCE
 
-            val selector = arrayOf(
+            val projection = arrayOf(
                 columnId,
                 columnName,
                 columnPresence
             )
             val cursor = db.query(
                 tableName,
-                selector, null, null, null, null, null
+                projection, null, null, null, null, null
+            )
+
+            if (cursor != null && cursor.count > 0) {
+                while (cursor.moveToNext()) {
+
+                    //INDEX da coluna 0 = id,   1 = name,  2 = presence
+                    val id = cursor.getInt(cursor.getColumnIndex(columnId))
+                    val name = cursor.getString(cursor.getColumnIndex(columnName))
+                    val presence = cursor.getInt(cursor.getColumnIndex(columnPresence))
+
+                    list.add(GuestModel(id, name, presence == 1))
+
+                }
+            }
+            cursor.close()
+
+        }catch (e: Exception){
+            return list
+        }
+        return list
+
+    }
+
+    @SuppressLint("Range")
+    fun getPresent(): List<GuestModel> {
+        val list = mutableListOf<GuestModel>()
+
+        try {
+            val db = guestDataBase.readableDatabase
+            val tableName = DataBaseConstants.GUEST.TABLE_NAME
+
+            val columnId = DataBaseConstants.GUEST.COLUMNS.ID
+            val columnName = DataBaseConstants.GUEST.COLUMNS.NAME
+            val columnPresence = DataBaseConstants.GUEST.COLUMNS.PRESENCE
+
+            val projection = arrayOf(
+                columnId,
+                columnName,
+                columnPresence
+            )
+            val selection = "$columnPresence = ?"
+            val args = arrayOf("1")
+
+            val cursor = db.query(
+                tableName,
+                projection, selection, args, null, null, null
+            )
+
+            if (cursor != null && cursor.count > 0) {
+                while (cursor.moveToNext()) {
+
+                    //INDEX da coluna 0 = id,   1 = name,  2 = presence
+                    val id = cursor.getInt(cursor.getColumnIndex(columnId))
+                    val name = cursor.getString(cursor.getColumnIndex(columnName))
+                    val presence = cursor.getInt(cursor.getColumnIndex(columnPresence))
+
+                    list.add(GuestModel(id, name, presence == 1))
+
+                }
+            }
+            cursor.close()
+
+        }catch (e: Exception){
+            return list
+        }
+        return list
+
+    }
+
+    @SuppressLint("Range")
+    fun getAbsent(): List<GuestModel> {
+        val list = mutableListOf<GuestModel>()
+
+        try {
+            val db = guestDataBase.readableDatabase
+            val tableName = DataBaseConstants.GUEST.TABLE_NAME
+
+            val columnId = DataBaseConstants.GUEST.COLUMNS.ID
+            val columnName = DataBaseConstants.GUEST.COLUMNS.NAME
+            val columnPresence = DataBaseConstants.GUEST.COLUMNS.PRESENCE
+
+            val projection = arrayOf(
+                columnId,
+                columnName,
+                columnPresence
+            )
+            val selection = "$columnPresence = ?"
+            val args = arrayOf("0")
+
+            val cursor = db.query(
+                tableName,
+                projection, selection, args, null, null, null
             )
 
             if (cursor != null && cursor.count > 0) {
