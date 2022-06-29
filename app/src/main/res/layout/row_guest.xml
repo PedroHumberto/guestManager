@@ -25,5 +25,24 @@
             android:text="Guest"
             android:textColor="@color/black"
             android:textSize="22sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btn_edit"
+                android:layout_width="116dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Edit" />
+            <Button
+                android:id="@+id/btn_delete"
+                android:layout_width="116dp"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:layout_marginLeft="15dp"
+                />
+        </LinearLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
