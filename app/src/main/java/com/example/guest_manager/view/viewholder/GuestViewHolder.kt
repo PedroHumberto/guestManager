@@ -17,7 +17,6 @@ class GuestViewHolder(private val bind: RowGuestBinding, private val listener: O
         bind.textName.text = guest.name
 
         bind.btnDelete.setOnClickListener {
-
             AlertDialog.Builder(itemView.context)
                 .setTitle("Removing Guest")
                 .setMessage("You Really Wanna Remove?")
@@ -27,8 +26,10 @@ class GuestViewHolder(private val bind: RowGuestBinding, private val listener: O
                 }
                 .create()
                 .show()
+        }
 
-
+        bind.btnEdit.setOnClickListener{
+            listener.onUpdate(guest.id)
         }
     }
 }

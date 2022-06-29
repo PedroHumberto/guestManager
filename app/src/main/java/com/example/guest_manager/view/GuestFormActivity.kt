@@ -1,5 +1,6 @@
 package com.example.guest_manager.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -15,6 +16,8 @@ class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityGuestFormBinding
     private lateinit var viewModel: GuestFormViewModel
 
+    private var guestId = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,6 +32,7 @@ class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
         saveButton.setOnClickListener(this)
         binding.radioPresent.isChecked = true
 
+        observe()
         loadData()
 
     }
@@ -38,9 +42,23 @@ class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
            val name = binding.editName.text.toString()
             val presence = binding.radioPresent.isChecked
 
-            val model = GuestModel(0, name, presence)
+            val model = GuestModel(guestId, name, presence)
 
-            viewModel.insert(model)
+            viewModel.save(model)
+
+            finish()
+
+        }
+    }
+    private fun observe(){
+        viewModel.guests.observe(this) {
+            binding.editName.setText(it.name)
+
+            if (it.presence) {
+                binding.radioPresent.isChecked = true
+            } else {
+                binding.radioAbsent.isChecked = true
+            }
         }
     }
     private fun loadData(){

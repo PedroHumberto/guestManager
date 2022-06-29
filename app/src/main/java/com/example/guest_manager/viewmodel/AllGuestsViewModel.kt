@@ -23,4 +23,7 @@ class AllGuestsViewModel(application: Application) : AndroidViewModel(applicatio
     fun delete(id: Int){
         repository.delete(id)
     }
+    fun get(id: Int){
+        repository.get(id)
+    }
 }
