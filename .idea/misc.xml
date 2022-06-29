@@ -7,6 +7,8 @@
         <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/drawable/layout_shadow_box.xml" value="0.228" />
         <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/drawable/side_nav_bar.xml" value="0.111" />
         <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/layout/activity_guest_form.xml" value="0.25" />
+        <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/layout/activity_main.xml" value="0.1793478260869565" />
+        <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/layout/app_bar_main.xml" value="0.1793478260869565" />
         <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/layout/content_main.xml" value="0.35643115942028986" />
         <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/layout/fragment_absent.xml" value="0.35643115942028986" />
         <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/layout/fragment_all_guests.xml" value="0.35643115942028986" />
