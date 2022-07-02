@@ -3,6 +3,7 @@ package com.example.guest_manager.view.viewholder
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guest_manager.databinding.RowGuestBinding
 import com.example.guest_manager.model.GuestModel
@@ -30,6 +31,15 @@ class GuestViewHolder(private val bind: RowGuestBinding, private val listener: O
 
         bind.btnEdit.setOnClickListener{
             listener.onUpdate(guest.id)
+        }
+        bind.btnCall.setOnClickListener{
+            //listener.onCall(guest.phone)
+            AlertDialog.Builder(itemView.context)
+                .setTitle("Clicado")
+                .setMessage("Teste")
+                .setNegativeButton("Clicado", null)
+                .create()
+                .show()
         }
     }
 }

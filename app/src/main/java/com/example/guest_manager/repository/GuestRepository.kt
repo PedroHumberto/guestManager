@@ -33,6 +33,7 @@ class GuestRepository private constructor(context: Context) {
             val values = ContentValues()
             values.put(DataBaseConstants.GUEST.COLUMNS.NAME, guest.name)
             values.put(DataBaseConstants.GUEST.COLUMNS.PRESENCE, presence)
+            values.put(DataBaseConstants.GUEST.COLUMNS.PHONE, guest.phone)
 
             db.insert(DataBaseConstants.GUEST.TABLE_NAME, null, values)
             return true
@@ -50,6 +51,7 @@ class GuestRepository private constructor(context: Context) {
             val presence = if (guest.presence) 1 else 0
             values.put(DataBaseConstants.GUEST.COLUMNS.NAME, guest.name)
             values.put(DataBaseConstants.GUEST.COLUMNS.PRESENCE, presence)
+            values.put(DataBaseConstants.GUEST.COLUMNS.PHONE, guest.phone)
 
             val selection = "${DataBaseConstants.GUEST.COLUMNS.ID} = ?"
             val args = arrayOf(guest.id.toString())
@@ -89,11 +91,13 @@ class GuestRepository private constructor(context: Context) {
             val columnId = DataBaseConstants.GUEST.COLUMNS.ID
             val columnName = DataBaseConstants.GUEST.COLUMNS.NAME
             val columnPresence = DataBaseConstants.GUEST.COLUMNS.PRESENCE
+            val columnPhone = DataBaseConstants.GUEST.COLUMNS.PHONE
 
             val projection = arrayOf(
                 columnId,
                 columnName,
-                columnPresence
+                columnPresence,
+                columnPhone
             )
             val cursor = db.query(
                 tableName,
@@ -107,8 +111,9 @@ class GuestRepository private constructor(context: Context) {
                     val id = cursor.getInt(cursor.getColumnIndex(columnId))
                     val name = cursor.getString(cursor.getColumnIndex(columnName))
                     val presence = cursor.getInt(cursor.getColumnIndex(columnPresence))
+                    val phone = cursor.getInt(cursor.getColumnIndex(columnPhone))
 
-                    list.add(GuestModel(id, name, presence == 1))
+                    list.add(GuestModel(id, name, presence == 1, phone))
 
                 }
             }
@@ -132,11 +137,13 @@ class GuestRepository private constructor(context: Context) {
             val columnId = DataBaseConstants.GUEST.COLUMNS.ID
             val columnName = DataBaseConstants.GUEST.COLUMNS.NAME
             val columnPresence = DataBaseConstants.GUEST.COLUMNS.PRESENCE
+            val columnPhone = DataBaseConstants.GUEST.COLUMNS.PHONE
 
             val projection = arrayOf(
                 columnId,
                 columnName,
-                columnPresence
+                columnPresence,
+                columnPhone
             )
 
             val selection = "${DataBaseConstants.GUEST.COLUMNS.ID} = ?"
@@ -153,8 +160,9 @@ class GuestRepository private constructor(context: Context) {
                     //INDEX da coluna 0 = id,   1 = name,  2 = presence
                     val name = cursor.getString(cursor.getColumnIndex(columnName))
                     val presence = cursor.getInt(cursor.getColumnIndex(columnPresence))
+                    val phone = cursor.getInt(cursor.getColumnIndex(columnPhone))
 
-                    guest = GuestModel(id, name, presence == 1)
+                    guest = GuestModel(id, name, presence == 1, phone)
 
                 }
             }
@@ -178,11 +186,13 @@ class GuestRepository private constructor(context: Context) {
             val columnId = DataBaseConstants.GUEST.COLUMNS.ID
             val columnName = DataBaseConstants.GUEST.COLUMNS.NAME
             val columnPresence = DataBaseConstants.GUEST.COLUMNS.PRESENCE
+            val columnPhone = DataBaseConstants.GUEST.COLUMNS.PHONE
 
             val projection = arrayOf(
                 columnId,
                 columnName,
-                columnPresence
+                columnPresence,
+                columnPhone
             )
             val selection = "$columnPresence = ?"
             val args = arrayOf("1")
@@ -199,8 +209,9 @@ class GuestRepository private constructor(context: Context) {
                     val id = cursor.getInt(cursor.getColumnIndex(columnId))
                     val name = cursor.getString(cursor.getColumnIndex(columnName))
                     val presence = cursor.getInt(cursor.getColumnIndex(columnPresence))
+                    val phone = cursor.getInt(cursor.getColumnIndex(columnPhone))
 
-                    list.add(GuestModel(id, name, presence == 1))
+                    list.add(GuestModel(id, name, presence == 1, phone))
 
                 }
             }
@@ -224,11 +235,13 @@ class GuestRepository private constructor(context: Context) {
             val columnId = DataBaseConstants.GUEST.COLUMNS.ID
             val columnName = DataBaseConstants.GUEST.COLUMNS.NAME
             val columnPresence = DataBaseConstants.GUEST.COLUMNS.PRESENCE
+            val columnPhone = DataBaseConstants.GUEST.COLUMNS.PHONE
 
             val projection = arrayOf(
                 columnId,
                 columnName,
-                columnPresence
+                columnPresence,
+                columnPhone
             )
             val selection = "$columnPresence = ?"
             val args = arrayOf("0")
@@ -245,8 +258,9 @@ class GuestRepository private constructor(context: Context) {
                     val id = cursor.getInt(cursor.getColumnIndex(columnId))
                     val name = cursor.getString(cursor.getColumnIndex(columnName))
                     val presence = cursor.getInt(cursor.getColumnIndex(columnPresence))
+                    val phone = cursor.getInt(cursor.getColumnIndex(columnPhone))
 
-                    list.add(GuestModel(id, name, presence == 1))
+                    list.add(GuestModel(id, name, presence == 1, phone))
 
                 }
             }

@@ -48,6 +48,7 @@ class AllGuestsFragment : Fragment() {
                 bundle.putInt(DataBaseConstants.GUEST.ID, id)
                 intent.putExtras(bundle)
 
+
                 startActivity(intent)
             }
 
@@ -56,7 +57,21 @@ class AllGuestsFragment : Fragment() {
                 viewModel.getAll()
             }
 
+            override fun onCall(phone: Int) {
+                TODO("Not yet implemented")
+            }
+
         }
+
+        /*
+        fun callNumber(phone: Int){
+            val call = Intent(context, TODO())
+            val bundle = Bundle()
+            bundle.putInt(DataBaseConstants.GUEST.PHONE, phone)
+            call.putExtras(bundle)
+        }
+        */
+
 
         adapter.attachListener(listener)
 
