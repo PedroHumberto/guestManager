@@ -1,6 +1,7 @@
 package com.example.guest_manager.view
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,8 +22,9 @@ import com.example.guest_manager.viewmodel.AllGuestsViewModel
 class AllGuestsFragment : Fragment() {
 
     private var _binding: FragmentAllGuestsBinding? = null
-    private lateinit var viewModel: AllGuestsViewModel
     private val binding get() = _binding!!
+
+    private lateinit var viewModel: AllGuestsViewModel
     private val adapter = GuestsAdapter()
 
     override fun onCreateView(
@@ -31,7 +33,7 @@ class AllGuestsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-       viewModel = ViewModelProvider(this).get(AllGuestsViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(AllGuestsViewModel::class.java)
         _binding = FragmentAllGuestsBinding.inflate(inflater, container, false)
 
         //Layout
@@ -41,7 +43,7 @@ class AllGuestsFragment : Fragment() {
         binding.recyclerAllGuests.adapter = adapter
 
         //Implementar a interface e membros
-        val listener = object : OnGuestListener{
+        val listener = object : OnGuestListener {
             override fun onUpdate(id: Int) {
                 val intent = Intent(context, GuestFormActivity::class.java)
                 val bundle = Bundle()
@@ -57,20 +59,16 @@ class AllGuestsFragment : Fragment() {
                 viewModel.getAll()
             }
 
-            override fun onCall(phone: Int) {
-                TODO("Not yet implemented")
+            override fun onCall(phone: String) {
+                val callIntent: Intent = Uri.parse("tel:${phone}").let { phoneNum ->
+                    Intent(Intent.ACTION_DIAL, phoneNum)
+                }
+                startActivity(callIntent)
             }
 
         }
 
-        /*
-        fun callNumber(phone: Int){
-            val call = Intent(context, TODO())
-            val bundle = Bundle()
-            bundle.putInt(DataBaseConstants.GUEST.PHONE, phone)
-            call.putExtras(bundle)
-        }
-        */
+
 
 
         adapter.attachListener(listener)
@@ -93,7 +91,7 @@ class AllGuestsFragment : Fragment() {
         _binding = null
     }
 
-    private fun observe(){
+    private fun observe() {
         viewModel.guests.observe(viewLifecycleOwner) {
             adapter.updateGuests(it)
         }

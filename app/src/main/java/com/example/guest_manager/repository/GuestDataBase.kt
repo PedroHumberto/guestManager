@@ -18,7 +18,7 @@ class GuestDataBase(context: Context,)
                 DataBaseConstants.GUEST.COLUMNS.ID + " integer primary key autoincrement, " +
                 DataBaseConstants.GUEST.COLUMNS.NAME + " text, " +
                 DataBaseConstants.GUEST.COLUMNS.PRESENCE + " integer, " +
-                DataBaseConstants.GUEST.COLUMNS.PHONE + " integer);")
+                DataBaseConstants.GUEST.COLUMNS.PHONE + " text);")
 
     }
 

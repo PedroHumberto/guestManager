@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.guest_manager.R
 import com.example.guest_manager.constants.DataBaseConstants
@@ -42,13 +43,11 @@ class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
         if (v.id == R.id.button) {
             val name = binding.editName.text.toString()
             val presence = binding.radioPresent.isChecked
-            val phone = binding.editPhone.text.toString().toInt()
+            val phone = binding.editPhone.text.toString()
 
             val model = GuestModel(guestId, name, presence, phone)
 
             viewModel.save(model)
-
-            finish()
 
         }
     }
@@ -56,14 +55,28 @@ class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
     private fun observe() {
         viewModel.guests.observe(this) {
             binding.editName.setText(it.name)
-            var getPhone = it.phone.toString()
-
-            binding.editPhone.setText(getPhone)
+            binding.editPhone.setText(it.phone)
 
             if (it.presence) {
                 binding.radioPresent.isChecked = true
             } else {
                 binding.radioAbsent.isChecked = true
+            }
+        }
+
+        //observer de atualização de convidados
+        viewModel.saveGuest.observe(this) {
+            if (it) {
+                if (guestId == 0) {
+                    Toast.makeText(applicationContext, "Guest Added Successful", Toast.LENGTH_SHORT)
+                        .show()
+                } else {
+                    Toast.makeText(applicationContext, "Updated Successful", Toast.LENGTH_SHORT)
+                        .show()
+                }
+                finish()
+            } else {
+                Toast.makeText(applicationContext, "Error", Toast.LENGTH_SHORT).show()
             }
         }
     }

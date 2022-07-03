@@ -33,13 +33,7 @@ class GuestViewHolder(private val bind: RowGuestBinding, private val listener: O
             listener.onUpdate(guest.id)
         }
         bind.btnCall.setOnClickListener{
-            //listener.onCall(guest.phone)
-            AlertDialog.Builder(itemView.context)
-                .setTitle("Clicado")
-                .setMessage("Teste")
-                .setNegativeButton("Clicado", null)
-                .create()
-                .show()
+            listener.onCall(guest.phone)
         }
     }
 }

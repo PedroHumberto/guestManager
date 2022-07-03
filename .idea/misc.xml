@@ -10,9 +10,9 @@
         <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/layout/activity_main.xml" value="0.1793478260869565" />
         <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/layout/app_bar_main.xml" value="0.1793478260869565" />
         <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/layout/content_main.xml" value="0.35643115942028986" />
-        <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/layout/fragment_absent.xml" value="0.35643115942028986" />
-        <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/layout/fragment_all_guests.xml" value="0.35643115942028986" />
-        <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/layout/fragment_present.xml" value="0.35643115942028986" />
+        <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/layout/fragment_absent.xml" value="0.25135135135135134" />
+        <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/layout/fragment_all_guests.xml" value="0.25135135135135134" />
+        <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/layout/fragment_present.xml" value="0.1" />
         <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/layout/nav_header_main.xml" value="0.26666666666666666" />
         <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/layout/row_guest.xml" value="0.29981378026070765" />
         <entry key="..\:/Programming/Kotlin/guest_manager/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />

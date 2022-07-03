@@ -111,7 +111,7 @@ class GuestRepository private constructor(context: Context) {
                     val id = cursor.getInt(cursor.getColumnIndex(columnId))
                     val name = cursor.getString(cursor.getColumnIndex(columnName))
                     val presence = cursor.getInt(cursor.getColumnIndex(columnPresence))
-                    val phone = cursor.getInt(cursor.getColumnIndex(columnPhone))
+                    val phone = cursor.getString(cursor.getColumnIndex(columnPhone))
 
                     list.add(GuestModel(id, name, presence == 1, phone))
 
@@ -160,7 +160,7 @@ class GuestRepository private constructor(context: Context) {
                     //INDEX da coluna 0 = id,   1 = name,  2 = presence
                     val name = cursor.getString(cursor.getColumnIndex(columnName))
                     val presence = cursor.getInt(cursor.getColumnIndex(columnPresence))
-                    val phone = cursor.getInt(cursor.getColumnIndex(columnPhone))
+                    val phone = cursor.getString(cursor.getColumnIndex(columnPhone))
 
                     guest = GuestModel(id, name, presence == 1, phone)
 
@@ -209,7 +209,7 @@ class GuestRepository private constructor(context: Context) {
                     val id = cursor.getInt(cursor.getColumnIndex(columnId))
                     val name = cursor.getString(cursor.getColumnIndex(columnName))
                     val presence = cursor.getInt(cursor.getColumnIndex(columnPresence))
-                    val phone = cursor.getInt(cursor.getColumnIndex(columnPhone))
+                    val phone = cursor.getString(cursor.getColumnIndex(columnPhone))
 
                     list.add(GuestModel(id, name, presence == 1, phone))
 
@@ -258,7 +258,7 @@ class GuestRepository private constructor(context: Context) {
                     val id = cursor.getInt(cursor.getColumnIndex(columnId))
                     val name = cursor.getString(cursor.getColumnIndex(columnName))
                     val presence = cursor.getInt(cursor.getColumnIndex(columnPresence))
-                    val phone = cursor.getInt(cursor.getColumnIndex(columnPhone))
+                    val phone = cursor.getString(cursor.getColumnIndex(columnPhone))
 
                     list.add(GuestModel(id, name, presence == 1, phone))
 
